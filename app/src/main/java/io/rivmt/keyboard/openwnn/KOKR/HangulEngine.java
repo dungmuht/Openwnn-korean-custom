@@ -330,6 +330,14 @@ public class HangulEngine {
 						this.jong = combination - 0x11a7;
 						last = jongCode + 0x11a7;
 						jongState = true;
+						// 2개가 같은 쌍자음일경우 초기화
+					} else if(beforeJong == last - 0x11a7) {
+						this.beforeJong = 0;
+						resetComposition();
+						this.cho = CHO_CONVERT[code - 0x3131] - 0x1100;
+						// 대응하는 초성이 존재하지 않을 경우 비운다.
+						if(this.cho == -0x1100) this.cho = -1;
+						last = CHO_CONVERT[code - 0x3131];
 						// 이미 있는 초성과 낱자 조합을 시도
 					} else if((combination = getCombination(convertToCho(last), convertToCho(jongCode+0x11a7))) != -1) {
 						this.jong = this.beforeJong;
