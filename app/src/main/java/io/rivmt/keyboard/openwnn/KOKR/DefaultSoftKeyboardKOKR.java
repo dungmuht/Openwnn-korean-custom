@@ -73,7 +73,7 @@ public class DefaultSoftKeyboardKOKR extends DefaultSoftKeyboard {
 
 	protected boolean mCapsLock;
 
-	protected int mLastInputType = 0;
+	public int mLastInputType = 0;
 	protected int mLastKeyMode = -1;
 	protected int mReturnLanguage = -1;
 
@@ -490,7 +490,9 @@ public class DefaultSoftKeyboardKOKR extends DefaultSoftKeyboard {
 			case "keyboard_dubul_danmoeum_google":
 				keyList[KEYBOARD_SHIFT_OFF][KEYMODE_HANGUL][0] = loadKeyboardLayout(mWnn, R.xml.keyboard_ko_dubul_danmoeum_google);
 				break;
-
+			case "keyboard_dubul_mui_danmoeum":
+				keyList[KEYBOARD_SHIFT_OFF][KEYMODE_HANGUL][0] = loadKeyboardLayout(mWnn, R.xml.keyboard_ko_dubul_mui_danmoeum);
+				break;
 			case "keyboard_12key_sebul_munhwa":
 			case "keyboard_12key_sebul_munhwa_predictive":
 				keyList[KEYBOARD_SHIFT_OFF][KEYMODE_HANGUL][0] = loadKeyboardLayout(mWnn, R.xml.keyboard_ko_12key_sebul_munhwa);

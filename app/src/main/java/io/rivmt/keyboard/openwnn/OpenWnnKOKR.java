@@ -149,7 +149,8 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 	boolean mSelectionMode;
 	int mSelectionStart, mSelectionEnd;
 
-	boolean mSpace, mCharInput;
+	boolean mSpace;
+	public boolean mCharInput;
 	boolean mInput;
 
 	boolean mBackspaceSelectionMode;
@@ -161,6 +162,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 	KeystrokePreference.KeyStroke mHardLangKey;
 
 	private static OpenWnnKOKR mSelf;
+
 	public static OpenWnnKOKR getInstance() {
 		return mSelf;
 	}
@@ -455,6 +457,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 	@Subscribe
 	public void onInputTimeout(InputTimeoutEvent event) {
 		if(mEnableTimeout) {
+			mCharInput = false;
 			resetCharComposition();
 		}
 		if(mQuickPeriod) {
@@ -607,9 +610,10 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 		case KeyEvent.KEYCODE_SPACE:
 			// 두벌식 단모음, 천지인, 12키 알파벳 자판 등에서 스페이스바로 조합 끊기 옵션 적용시
 			if(mSpaceResetJohab) {
-				if(mCurrentEngineMode.properties.timeout) {
+				if(mCharInput) {
 					resetCharComposition();
-                    mInputConnection.commitText(" ", 1);
+                    mInputConnection.commitText("", 1);
+					mCharInput = false;
 					return;
 				}
 			}

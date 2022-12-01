@@ -8,9 +8,9 @@ import java.util.Stack;
  * 한글 낱자를 받아 조합해서 출력하는 역할을 담당한다.
  */
 public class HangulEngine {
-	
+
 	public static final int INPUT_NON_HANGUL = 0x0000;
-	
+
 	public static final int INPUT_CHO3 = 0x1011;
 	public static final int INPUT_JUNG3 = 0x1012;
 	public static final int INPUT_JONG3 = 0x1013;
@@ -49,7 +49,7 @@ public class HangulEngine {
 
 	// 호환용 한글 자모를 표준 한글 자모로 변환하기 위한 테이블.
 	public static int[] CHO_CONVERT = {
-					0x1100, 0x1101, 0x0000, 0x1102, 0x0000, 0x115d, 0x1103,		// 0x3130 (0x115d: traditional)
+			0x1100, 0x1101, 0x0000, 0x1102, 0x0000, 0x115d, 0x1103,		// 0x3130 (0x115d: traditional)
 			0x1104, 0x1105, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,		// 0x3138
 			0x111a, 0x1106, 0x1107, 0x1108, 0x0000, 0x1109, 0x110a, 0x110b,		// 0x3140 (0x111a: traditional)
 			0x110c, 0x110d, 0x110e, 0x110f, 0x1110, 0x1111, 0x1112, 0x0000,		// 0x3148
@@ -63,7 +63,7 @@ public class HangulEngine {
 	};
 
 	public static int[] JONG_CONVERT = {
-					0x11a8, 0x11a9, 0x11aa, 0x11ab, 0x11ac, 0x11ad, 0x11ae,		// 0x3130
+			0x11a8, 0x11a9, 0x11aa, 0x11ab, 0x11ac, 0x11ad, 0x11ae,		// 0x3130
 			0x0000, 0x11af, 0x11b0, 0x11b1, 0x11b2, 0x11b3, 0x11b4, 0x11b5,		// 0x3138
 			0x11b6, 0x11b7, 0x11b8, 0x0000, 0x11b9, 0x11ba, 0x11bb, 0x11bc,		// 0x3140
 			0x11bd, 0x0000, 0x11be, 0x11bf, 0x11c0, 0x11c1, 0x11c2, 0x0000,		// 0x3148
@@ -112,7 +112,7 @@ public class HangulEngine {
 	/**
 	 * 이전까지 조합 중이던 한글 종성. (도깨비불 발생시 필요)
 	 */
-	 int beforeJong;
+	int beforeJong;
 	/**
 	 * 화면에 표시되는 조합 중인 글자.
 	 */
@@ -170,18 +170,18 @@ public class HangulEngine {
 	 * 낱자 조합 테이블.
 	 * 한글 낱자를 어떻게 조합할지 정의한다. (예: 0x1100 + 0x1100 = 0x1101, ㄱ+ㄱ=ㄲ)
 	 */
-    private int[][] combinationTable;
+	private int[][] combinationTable;
 
 	public HangulEngine() {
 		// 한글 조합 상태를 초기화한다.
 		resetComposition();
 	}
-	
+
 	public HangulEngine(boolean moachigi) {
 		this();
 		this.moachigi = moachigi;
 	}
-	
+
 	public boolean backspace() {
 		try {
 			// 입력 기록을 하나 빼 온다.
@@ -194,7 +194,7 @@ public class HangulEngine {
 			this.beforeJong = history.beforeJong;
 			this.composing = history.composing;
 			this.lastInputType = history.lastInputType;
-			
+
 		} catch(EmptyStackException e) {
 			// 스택이 비었을 경우 (입력된 낱자가 없을 경우)
 			lastInputType = 0;
@@ -260,15 +260,15 @@ public class HangulEngine {
 				} else {
 					resetComposition();
 				}
-            // 낱자 조합에 실패했을 경우 (이미 초성이 입력되어 있음) 조합을 종료한다.
+				// 낱자 조합에 실패했을 경우 (이미 초성이 입력되어 있음) 조합을 종료한다.
 			} else if(this.cho != -1) resetComposition();
-            this.cho = choCode;
+			this.cho = choCode;
 			// 가상 낱자일 경우 다음 상태로 넘기지 않는다.
 			if(lastInputType == 0) result = INPUT_CHO3;
 			else if(preserveState) result = lastInputType;
 			else result = INPUT_CHO3;
 			last = code;
-		// 세벌식 한글 중성.
+			// 세벌식 한글 중성.
 		} else if(filteredCode >= 0x1161 && filteredCode <= 0x11a7) {
 			int jungCode = code - 0x1161;
 			if(!moachigi && !isCho(last) && !isJung(last)) resetComposition();
@@ -289,7 +289,7 @@ public class HangulEngine {
 			else if(preserveState) result = lastInputType;
 			else result = INPUT_JUNG3;
 			last = code;
-		// 세벌식 한글 종성.
+			// 세벌식 한글 종성.
 		} else if(filteredCode >= 0x11a8 && filteredCode <= 0x11ff) {
 			int jongCode = code - 0x11a7;
 			if(!moachigi && !isJung(last) && !isJong(last)) resetComposition();
@@ -325,7 +325,7 @@ public class HangulEngine {
 						this.beforeJong = this.jong;
 						this.jong = combination - 0x11a7;
 						last = jongCode + 0x11a7;
-					// 낱자 조합 불가/실패시
+						// 낱자 조합 불가/실패시
 					} else {
 						this.beforeJong = 0;
 						resetComposition();
@@ -334,7 +334,7 @@ public class HangulEngine {
 						if(this.cho == -0x1100) this.cho = -1;
 						last = CHO_CONVERT[code - 0x3131];
 					}
-				// 종성이 없을 경우
+					// 종성이 없을 경우
 				} else {
 					// 해당하는 종성이 없을 경우 (ㄸ, ㅉ, ㅃ 등)
 					if(jongCode == -0x11a7) {
@@ -343,14 +343,14 @@ public class HangulEngine {
 						this.cho = CHO_CONVERT[code - 0x3131] - 0x1100;
 						if(this.cho == -0x1100) this.cho = -1;
 						last = CHO_CONVERT[code - 0x3131];
-					// 해당하는 종성이 있을 경우, 종성을 조합한다.
+						// 해당하는 종성이 있을 경우, 종성을 조합한다.
 					} else {
 						this.beforeJong = 0;
 						this.jong = jongCode;
 						last = jongCode + 0x11a7;
 					}
 				}
-			// 초성이나 중성이 없을 경우
+				// 초성이나 중성이 없을 경우
 			} else {
 				int choCode = CHO_CONVERT[code - 0x3131] - 0x1100;
 				// 초성이 이미 존재할 경우
@@ -364,7 +364,7 @@ public class HangulEngine {
 						this.cho = choCode;
 						if(this.cho == -0x1100) this.cho = -1;
 					}
-				// 초성이 없을 경우, 새로운 초성으로 조합 시작.
+					// 초성이 없을 경우, 새로운 초성으로 조합 시작.
 				} else {
 					if(!moachigi) resetComposition();
 					this.cho = choCode;
@@ -374,7 +374,7 @@ public class HangulEngine {
 				if(this.cho == -0x1100) this.cho = -1;
 			}
 			result = INPUT_CHO2;
-		// 두벌식 중성.
+			// 두벌식 중성.
 		} else if(filteredCode >= 0x314f && filteredCode <= 0x3163 || filteredCode >= 0x3187 && filteredCode <= 0x318e) {
 			// 조합 중인 종성이 없을 경우.
 			if(this.jong == -1) {
@@ -403,7 +403,7 @@ public class HangulEngine {
 					this.jung = jungCode;
 				}
 				last = (jungCode >= 0) ? jungCode + 0x1161 : jungCode;
-			// 조합 중인 종성이 존재할 경우 (도깨비불 발생)
+				// 조합 중인 종성이 존재할 경우 (도깨비불 발생)
 			} else {
 				int jungCode = code - 0x314f;
 				if(code >= 0x3187 && code <= 0x318e) jungCode = TRAD_JUNG_CONVERT[code - 0x3187] - 0x1161;
@@ -412,21 +412,31 @@ public class HangulEngine {
 				if(this.cho != -1) {
 					// 종성이 두 개 이상 결합되었을 경우
 					if(beforeJong != 0) {
-						// 앞 종성을 앞 글자의 종성으로 한다.
-						this.jong = beforeJong;
-						this.composing = getVisible(this.cho, this.jung, this.jong);
 						if(listener != null) listener.onEvent(new SetComposingEvent(composing));
 						// resetJohab시 last를 초기화하므로 백업한다.
 						int last = this.last;
-						// 그리고 조합을 종료한 뒤,
-						resetComposition();
-						// 뒷 종성을 초성으로 변환하여 적용한다.
-						this.cho = convertToCho(last) - 0x1100;
-						composing = getVisible(this.cho, this.jung, this.jong);
+						//
+						if((combination = convertToCho(this.jong+0x11a7)) != 0) {
+							this.jong = -1;
+							this.composing = getVisible(this.cho, this.jung, this.jong);
+							if(listener != null) listener.onEvent(new SetComposingEvent(composing));
+							// 그리고 조합을 종료한 뒤,
+							resetComposition();
+							this.cho = combination - 0x1100;
+						} else {
+							// 낱자 결합 불가 / 실패시 새로운 초성으로 조합 시작.
+							// 앞 종성을 앞 글자의 종성으로 한다.
+							this.jong = beforeJong;
+							this.composing = getVisible(this.cho, this.jung, this.jong);
+							if(listener != null) listener.onEvent(new SetComposingEvent(composing));
+							resetComposition();
+							this.cho = convertToCho(last) - 0x1100;
+							composing = getVisible(this.cho, this.jung, this.jong);
+						}
 						// 도깨비불이 일어났으므로 기록을 하나 더 남긴다.
 						histories.push(new History(cho, jung, jong, last, beforeJong, composing, lastInputType));
 						this.jung = jungCode;
-					// 결합된 종성이 아니었을 경우
+						// 결합된 종성이 아니었을 경우
 					} else {
 						// 종성을 초성으로 변환해서 적용한다.
 						int convertedCho;
@@ -441,7 +451,7 @@ public class HangulEngine {
 							this.jung = jungCode;
 						}
 					}
-				// 예외 상황에는 조합을 종료하고 새로운 중성으로 조합을 시작한다.
+					// 예외 상황에는 조합을 종료하고 새로운 중성으로 조합을 시작한다.
 				} else {
 					resetComposition();
 					this.jung = jungCode;
@@ -490,7 +500,7 @@ public class HangulEngine {
 	 * @param b		종성 ㅅ.
 	 * @return		종성 ㄳ. 해당하는 조합이 없을 경우 {@code -1}.
 	 */
-    private int getCombination(int a, int b) {
+	private int getCombination(int a, int b) {
 		for(int[] item : combinationTable) {
 			if(item[0] == a && item[1] == b) return item[2];
 		}
@@ -515,7 +525,7 @@ public class HangulEngine {
 		}
 		return null;
 	}
-	
+
 	private static class Pair {
 		int jong, cho;
 		public Pair(int jong, int cho) {
@@ -560,42 +570,42 @@ public class HangulEngine {
 						+ new String(new char[] {(char) (jung + 0x1161)});
 				if(jong != -1) visible += new String(new char[] {(char) (jong + 0x11a8 - 1)});
 			}
-		// 초성 + 중성 + 종성
+			// 초성 + 중성 + 종성
 		} else if(cho != -1 && jung != -1 && jong != -1) {
 			visible = String.valueOf((char) combineHangul(cho, jung, jong));
-		// 초성 + 중성
+			// 초성 + 중성
 		} else if(cho != -1 && jung != -1) {
 			visible = String.valueOf((char) combineHangul(cho, jung, 0));
-		// 첫가끝 조합이 가능한 경우
+			// 첫가끝 조합이 가능한 경우
 		} else if(firstMidEnd) {
 			// 초성
 			if(cho != -1 && jung == -1 && jong == -1) {
 				visible = String.valueOf((char) CHO_TABLE[cho]);
-			// 중성
+				// 중성
 			} else if(cho == -1 && jung != -1 && jong == -1) {
 				visible = String.valueOf((char) JUNG_TABLE[jung]);
-			// 종성
+				// 종성
 			} else if(cho == -1 && jung == -1 && jong != -1) {
 				visible = String.valueOf((char) JONG_TABLE[jong]);
-			// 나머지 경우에는 첫가끝 조합.
+				// 나머지 경우에는 첫가끝 조합.
 			} else {
 				if (cho == -1) cho = 0x5f;
 				visible = new String(new char[]{(char) (cho + 0x1100)})
 						+ new String(new char[]{(char) (jung + 0x1161)});
 				if (jong != -1) visible += new String(new char[]{(char) (jong + 0x11a8 - 1)});
 			}
-		// 첫가끝 조합을 사용하지 않도록 한 경우
+			// 첫가끝 조합을 사용하지 않도록 한 경우
 		} else {
 			// 초성이 있으면 초성 표시
 			if (cho != -1) {
 				visible = String.valueOf((char) CHO_TABLE[cho]);
-			// 중성이 있으면 중성 표시
+				// 중성이 있으면 중성 표시
 			} else if (jung != -1) {
 				visible = String.valueOf((char) JUNG_TABLE[jung]);
-			// 종성이 있으면 종성 표시
+				// 종성이 있으면 종성 표시
 			} else if (jong != -1) {
 				visible = String.valueOf((char) JONG_TABLE[jong]);
-			// 예외 경우에는 아무것도 표시 안함.
+				// 예외 경우에는 아무것도 표시 안함.
 			} else {
 				visible = "";
 			}
@@ -623,7 +633,7 @@ public class HangulEngine {
 	public boolean isJong(int code) {
 		return (code & 0xffff) >= 0x11a8 && (code & 0xffff) <= 0x11ff;
 	}
-	
+
 	public boolean isMoachigi() {
 		return moachigi;
 	}
@@ -736,5 +746,5 @@ public class HangulEngine {
 	public int getLastInputType() {
 		return lastInputType;
 	}
-	
+
 }

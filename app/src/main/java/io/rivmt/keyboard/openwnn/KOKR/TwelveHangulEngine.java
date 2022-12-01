@@ -3,9 +3,8 @@ package io.rivmt.keyboard.openwnn.KOKR;
 public class TwelveHangulEngine extends HangulEngine {
 	
 	int[][] addStrokeTable;
-	
+
 	int lastCode;
-	
 	int cycleIndex;
 	int addStrokeBase, addStrokeBaseCombined;
 	int addStrokeIndex;

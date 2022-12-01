@@ -26,8 +26,10 @@ import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutAlphabet.CYCLE_12KEY_A
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDev.COMB_NEBUL_1969;
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDev.JAMO_NEBUL_1969;
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.COMB_DUBUL_DANMOEUM_GOOGLE;
+import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.COMB_DUBUL_MUI_DANMOEUM;
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.COMB_DUBUL_STANDARD;
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.JAMO_DUBUL_DANMOEUM_GOOGLE;
+import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.JAMO_DUBUL_MUI_DANMOEUM;
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.JAMO_DUBUL_NK;
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.JAMO_DUBUL_STANDARD;
 import static io.rivmt.keyboard.openwnn.KOKR.layout.LayoutDubul.JAMO_DUBUL_YET;
@@ -109,6 +111,8 @@ public enum EngineMode {
 			CYCLE_DUBUL_12KEY_SKY2, null, COMB_DUBUL_12KEY_SKY2, null, "keyboard_12key_dubul_sky2"),
 	TWELVE_DUBUL_DANMOEUM				(new Properties(true, false, true),
 			JAMO_DUBUL_DANMOEUM_GOOGLE, null, COMB_DUBUL_DANMOEUM_GOOGLE, null, "keyboard_dubul_danmoeum_google"),
+	MUI_DANMOEUM				(new Properties(true, false, true),
+			JAMO_DUBUL_MUI_DANMOEUM, null, COMB_DUBUL_MUI_DANMOEUM, null, "keyboard_dubul_mui_danmoeum"),
 
 	ENGLISH_QWERTY	(new Properties(DefaultSoftKeyboardKOKR.LANG_EN, false, false, false, false, false, false),
 			null, null, null, null, "keyboard_alphabet_qwerty"),
