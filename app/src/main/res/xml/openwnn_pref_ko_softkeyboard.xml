@@ -13,7 +13,7 @@
 			android:summary="@string/preference_keyboard_hangul_12key_summary"
 			android:entries="@array/keyboard_12key_layout"
 			android:entryValues="@array/keyboard_12key_layout_id"
-			android:defaultValue="keyboard_dubul_danmoeum_google" />
+			android:defaultValue="keyboard_dubul_mui_danmoeum" />
 		<io.rivmt.keyboard.openwnn.KOKR.preference.KeyboardListPreferenceKOKR
 			android:key="keyboard_hangul_layout"
 			android:title="@string/preference_keyboard_hangul_title"
@@ -63,7 +63,7 @@
 			android:entries="@array/keyboard_soft_layout"
 			android:entryValues="@array/keyboard_soft_layout_id"
 			layoutKey="keyboard_alphabet_layout"
-			android:defaultValue="l1.0" />
+			android:defaultValue="l1.1" />
 		<io.rivmt.keyboard.openwnn.KOKR.preference.SoftLayoutPreference
 			android:key="keyboard_alphabet_soft_layout_landscape"
 			android:title="@string/preference_keyboard_alphabet_soft_landscape_title"
@@ -71,14 +71,14 @@
 			android:entries="@array/keyboard_soft_layout"
 			android:entryValues="@array/keyboard_soft_layout_id"
 			layoutKey="keyboard_alphabet_layout"
-			android:defaultValue="l1.0" />
+			android:defaultValue="l1.1" />
 		<io.rivmt.keyboard.openwnn.KOKR.preference.KeyboardListPreferenceKOKR
 			android:key="keyboard_symbols_layout"
 			android:title="@string/preference_keyboard_symbols_title"
 			android:summary="@string/preference_keyboard_symbols_summary"
 			android:entries="@array/keyboard_symbols_layout"
 			android:entryValues="@array/keyboard_symbols_layout_id"
-			android:defaultValue="keyboard_symbols_a" />
+			android:defaultValue="keyboard_symbols_b" />
 		<io.rivmt.keyboard.openwnn.KOKR.preference.SoftLayoutPreference
 			android:key="keyboard_symbols_soft_layout_portrait"
 			android:title="@string/preference_keyboard_symbols_soft_portrait_title"
@@ -86,7 +86,7 @@
 			android:entries="@array/keyboard_soft_layout"
 			android:entryValues="@array/keyboard_soft_layout_id"
 			layoutKey="keyboard_symbols_layout"
-			android:defaultValue="l1.0" />
+			android:defaultValue="l1.1" />
 		<io.rivmt.keyboard.openwnn.KOKR.preference.SoftLayoutPreference
 			android:key="keyboard_symbols_soft_layout_landscape"
 			android:title="@string/preference_keyboard_symbols_soft_landscape_title"
@@ -94,7 +94,7 @@
 			android:entries="@array/keyboard_soft_layout"
 			android:entryValues="@array/keyboard_soft_layout_id"
 			layoutKey="keyboard_symbols_layout"
-			android:defaultValue="l1.0" />
+			android:defaultValue="l1.1" />
 		<CheckBoxPreference android:key="keyboard_use_flick"
 			android:title="@string/preference_keyboard_use_flick_title"
 			android:summary="@string/preference_keyboard_use_flick_summary"
@@ -138,15 +138,15 @@
 			android:key="keyboard_timeout_delay"
 			android:title="@string/preference_keyboard_timeout_delay_title"
 			android:summary="@string/preference_keyboard_timeout_delay_summary"
-			android:defaultValue="0" />
+			android:defaultValue="1000" />
 		<CheckBoxPreference android:key="keyboard_space_reset_composing"
 			android:title="@string/preference_keyboard_space_reset_composing_title"
 			android:summary="@string/preference_keyboard_space_reset_composing_summary"
-			android:defaultValue="true" />
+			android:defaultValue="false" />
 		<CheckBoxPreference android:key="keyboard_use_moachigi"
 			android:title="@string/preference_keyboard_use_moachigi_title"
 			android:summary="@string/preference_keyboard_use_moachigi_summary"
-			android:defaultValue="true" />
+			android:defaultValue="false" />
 		<CheckBoxPreference android:key="keyboard_quick_period"
 			android:title="@string/preference_keyboard_quick_period_title"
 			android:summary="@string/preference_keyboard_quick_period_summary"
