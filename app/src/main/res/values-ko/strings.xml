@@ -85,6 +85,7 @@
     
     <string name="preference_keyboard_dubul_standard">두벌식 표준</string>
     <string name="preference_keyboard_dubul_danmoeum_google">두벌식 Google 단모음</string>
+    <string name="preference_keyboard_dubul_mui_danmoeum">무이단모음</string>
     <string name="preference_keyboard_dubul_nk">두벌식 북한 국규</string>
     <string name="preference_keyboard_sebul_390">세벌식 390</string>
     <string name="preference_keyboard_sebul_391">세벌식 최종</string>
