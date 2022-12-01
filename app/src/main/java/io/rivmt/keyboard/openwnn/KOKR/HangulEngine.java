@@ -325,6 +325,14 @@ public class HangulEngine {
 						this.beforeJong = this.jong;
 						this.jong = combination - 0x11a7;
 						last = jongCode + 0x11a7;
+						// 이미 있는 초성과 낱자 조합을 시도
+					} else if((combination = getCombination(convertToCho(last), convertToCho(jongCode+0x11a7))) != -1) {
+						this.jong = this.beforeJong;
+						this.composing = getVisible(this.cho, this.jung, this.jong);
+						if(listener != null) listener.onEvent(new SetComposingEvent(composing));
+						resetComposition();
+						this.cho = combination - 0x1100;
+						last = convertToCho(jongCode+0x11a7);
 						// 낱자 조합 불가/실패시
 					} else {
 						this.beforeJong = 0;
@@ -412,7 +420,6 @@ public class HangulEngine {
 				if(this.cho != -1) {
 					// 종성이 두 개 이상 결합되었을 경우
 					if(beforeJong != 0) {
-						if(listener != null) listener.onEvent(new SetComposingEvent(composing));
 						// resetJohab시 last를 초기화하므로 백업한다.
 						int last = this.last;
 						//
