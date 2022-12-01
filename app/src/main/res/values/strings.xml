@@ -335,6 +335,7 @@
 
     <string name="preference_keyboard_dubul_standard">Dubeolsik Standard</string>
     <string name="preference_keyboard_dubul_danmoeum_google">Dubeolsik Google Danmoeum (Single-Vowel)</string>
+    <string name="preference_keyboard_dubul_mui_danmoeum">Mui Danmoeum</string>
     <string name="preference_keyboard_dubul_nk">Dubeolsik North Korea</string>
     <string name="preference_keyboard_sebul_390">Sebeolsik 390</string>
     <string name="preference_keyboard_sebul_391">Sebeolsik Final</string>
