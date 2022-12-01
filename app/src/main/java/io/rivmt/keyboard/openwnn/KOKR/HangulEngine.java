@@ -123,6 +123,8 @@ public class HangulEngine {
 	 */
 	int lastInputType;
 
+	public static boolean jongState = false;
+
 	/**
 	 * History
 	 * 한글 입력 기록을 저장하기 위한 객체의 클래스.
@@ -212,6 +214,7 @@ public class HangulEngine {
 		return true;
 	}
 
+
 	/**
 	 * 입력된 키의 코드를 받아서 대응하는 한글 낱자/비한글 문자를 돌려준다.
 	 * @param code		입력된 키의 코드.
@@ -248,6 +251,7 @@ public class HangulEngine {
 		int filteredCode = code & 0xffff;
 		int result;
 		int combination;
+		jongState = false;
 		// 세벌식 한글 초성.
 		if(filteredCode >= 0x1100 && filteredCode <= 0x115f) {
 			int choCode = code - 0x1100;
@@ -325,6 +329,7 @@ public class HangulEngine {
 						this.beforeJong = this.jong;
 						this.jong = combination - 0x11a7;
 						last = jongCode + 0x11a7;
+						jongState = true;
 						// 이미 있는 초성과 낱자 조합을 시도
 					} else if((combination = getCombination(convertToCho(last), convertToCho(jongCode+0x11a7))) != -1) {
 						this.jong = this.beforeJong;
@@ -356,6 +361,7 @@ public class HangulEngine {
 						this.beforeJong = 0;
 						this.jong = jongCode;
 						last = jongCode + 0x11a7;
+						jongState = true;
 					}
 				}
 				// 초성이나 중성이 없을 경우
