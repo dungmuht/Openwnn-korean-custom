@@ -437,7 +437,7 @@ public class HangulEngine {
 						// resetJohab시 last를 초기화하므로 백업한다.
 						int last = this.last;
 						//
-						if((combination = convertToCho(this.jong+0x11a7)) != 0) {
+						if((combination = getCombination(convertToCho(this.last), convertToCho(beforeJong+0x11a7))) != -1) {
 							this.jong = -1;
 							this.composing = getVisible(this.cho, this.jung, this.jong);
 							if(listener != null) listener.onEvent(new SetComposingEvent(composing));
