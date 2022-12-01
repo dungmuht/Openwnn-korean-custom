@@ -456,7 +456,7 @@ public class OpenWnnKOKR extends OpenWnn implements HangulEngineListener {
 
 	@Subscribe
 	public void onInputTimeout(InputTimeoutEvent event) {
-		if(mEnableTimeout) {
+		if(mEnableTimeout && HangulEngine.jongState) {
 			mCharInput = false;
 			resetCharComposition();
 		}
